@@ -40,8 +40,15 @@ _magento2()
     COMPREPLY=()
     cur="\${COMP_WORDS[COMP_CWORD]}"
     prev="\${COMP_WORDS[COMP_CWORD-1]}"
+    firstword=
+    for ((i = 1; i < \${#COMP_WORDS[@]}; ++i)); do
+        if [[ \${COMP_WORDS[i]} != -* ]]; then
+            firstword=\${COMP_WORDS[i]}
+            break
+        fi
+    done
     opts="{$this->getAllCommands()}"
-    case "\$prev" in 
+    case "\$firstword" in 
 {$this->getDefinitions()}
     esac
     COMPREPLY=( $(compgen -W "\${opts}" -- \${cur}) )
@@ -66,7 +73,7 @@ TEMPLATE;
             $options = implode(' ', $options);
             $definitions .= <<<TEMPLATE
         {$name})
-            COMPREPLY=($(compgen -W "{$options}" \${cur}))
+            COMPREPLY=($(compgen -W "{$options}" -- "\$cur"))
             return 0;
         ;;
 

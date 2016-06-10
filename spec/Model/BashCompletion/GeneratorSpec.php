@@ -53,10 +53,17 @@ _magento2()
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
+    firstword=
+    for ((i = 1; i < ${#COMP_WORDS[@]}; ++i)); do
+        if [[ ${COMP_WORDS[i]} != -* ]]; then
+            firstword=${COMP_WORDS[i]}
+            break
+        fi
+    done
     opts="test:command other-command"
-    case "$prev" in 
+    case "$firstword" in 
         test:command)
-            COMPREPLY=($(compgen -W "--option1 --option2" ${cur}))
+            COMPREPLY=($(compgen -W "--option1 --option2" -- "$cur"))
             return 0;
         ;;
 
