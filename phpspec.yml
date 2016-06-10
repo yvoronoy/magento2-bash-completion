@@ -1,0 +1,6 @@
+suites:
+  default:
+    namespace: Voronoy\BashCompletion
+    psr4_prefix: Voronoy\BashCompletion
+    src_path: %paths.config%/src
+    spec_path: %paths.config%
