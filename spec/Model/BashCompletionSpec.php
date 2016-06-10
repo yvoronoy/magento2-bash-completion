@@ -15,17 +15,11 @@ class BashCompletionSpec extends ObjectBehavior
 {
     function let(
         Filesystem $filesystem, 
-        Generator $bashCompleteGenerator,
-        CommandCollection $collection,
-        Command $command1,
-        Command $command2
+        Generator $bashCompleteGenerator
     ) {
-        $collection->add($command1);
-        $collection->add($command2);
         $this->beConstructedWith(
             $filesystem,
-            $bashCompleteGenerator,
-            $collection
+            $bashCompleteGenerator
         );
     }
     function it_is_initializable()
@@ -38,13 +32,27 @@ class BashCompletionSpec extends ObjectBehavior
         Filesystem\Directory\WriteInterface $write,
         Generator $bashCompleteGenerator
     ) {
+        $bashCompleteGenerator->generate()->shouldBeCalled()->willReturn('abc');
         $filesystem->getDirectoryWrite(DirectoryList::VAR_DIR)
             ->willReturn($write)
             ->shouldBeCalled(1);
+        $write->writeFile('magento2-bash-completion', 'abc')->willReturn(3);
 
-        $bashCompleteGenerator->generate()->shouldBeCalled()->willReturn(3);
-        
         $this->generateCompletionList()
             ->shouldReturn('Magento2 Bash Completion generated in var/magento2-bash-completion');
+    }
+    
+    function it_should_return_entered_name(
+        Filesystem $filesystem,
+        Generator $bashCompleteGenerator,
+        Filesystem\Directory\WriteInterface $write
+    ) {
+        $bashCompleteGenerator->generate()->shouldBeCalled()->willReturn('abc');
+        $filesystem->getDirectoryWrite(DirectoryList::VAR_DIR)
+            ->willReturn($write)
+            ->shouldBeCalled(1);
+        $write->writeFile('custom-name', 'abc')->willReturn(3);
+        $this->generateCompletionList('custom-name')
+            ->shouldReturn('Magento2 Bash Completion generated in var/custom-name');
     }
 }

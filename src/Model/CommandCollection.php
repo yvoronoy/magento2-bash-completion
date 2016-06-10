@@ -29,4 +29,14 @@ class CommandCollection implements \Countable
     {
         return count($this->commands);
     }
+
+    /**
+     * Set Items
+     * 
+     * @param array $commands
+     */
+    public function setItems(array $commands)
+    {
+        $this->commands = $commands;
+    }
 }

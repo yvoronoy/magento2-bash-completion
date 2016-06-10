@@ -32,4 +32,10 @@ class CommandCollectionSpec extends ObjectBehavior
         
         $this->count()->shouldBe(2);
     }
+    
+    function it_can_add_multiple_items_to_collection(Command $command1, Command $command2)
+    {
+        $this->setItems([$command1, $command2]);
+        $this->count()->shouldBe(2);
+    }
 }

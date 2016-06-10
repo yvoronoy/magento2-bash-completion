@@ -1,7 +1,8 @@
 {
     "require": {
         "phpspec/phpspec": "^2.5",
-        "magento/framework": "^100.0"
+        "magento/framework": "^100.0",
+        "phpmd/phpmd": "2.3.*"
     },
     "minimum-stability": "stable",
     "autoload": {

@@ -13,29 +13,40 @@ use Voronoy\BashCompletion\Model\CommandCollection;
 
 class BashCompletionCommand extends Command
 {
+    const COMMAND_NAME = 'bash:completion:generate';
+
+    const INPUT_ARG_NAME = 'name';
+
+    private $commandCollection;
+
+    private $bashCompletion;
+
+    public function __construct(
+        CommandCollection $commandCollection,
+        BashCompletion $bashCompletion
+    ) {
+        $this->commandCollection = $commandCollection;
+        $this->bashCompletion = $bashCompletion;
+        parent::__construct();
+    }
+
     protected function configure()
     {
-        $this->setName('bash:completion:generate')->setDescription('Generate Bash Completion List.');
+        $this->setName(self::COMMAND_NAME)
+            ->setDescription('Generate Bash Completion List.');
         $this->setDefinition([new InputArgument(
-            'path',
+            self::INPUT_ARG_NAME,
             InputArgument::OPTIONAL,
-            'Path to Bash Completion List'
+            'Bash Completion File Name'
         )]);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $description = new ApplicationDescription($this->getApplication());
-        $commands = $description->getCommands();
-        $commandCollection = new CommandCollection();
-        foreach ($commands as $command) {
-            $commandCollection->add($command);
-        }
-        
-        $filesystem = ObjectManager::getInstance()->get(Filesystem::class);
-        $generator = new BashCompletion\Generator($commandCollection);
-        $bashCompletion = new BashCompletion($filesystem, $generator, $commandCollection);
-        $result = $bashCompletion->generateCompletionList();
+        $this->commandCollection->setItems($description->getCommands());
+        $result = $this->bashCompletion->generateCompletionList(
+            $input->getArgument(self::INPUT_ARG_NAME));
 
         return $output->writeln($result);
     }
