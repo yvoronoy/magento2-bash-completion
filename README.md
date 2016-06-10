@@ -40,5 +40,5 @@ Don't forget reload shell or you can load new complition by next command: `user@
 
 
 If you don't have installed bash-completion follow these guides:
- * (How to install bash-completion in Debian)[https://www.howtoforge.com/how-to-add-bash-completion-in-debian]
- * (How to install bash-completion in MacOSX)[http://davidalger.com/development/bash-completion-on-os-x-with-MacOSX
+ * [How to install bash-completion in Debian](https://www.howtoforge.com/how-to-add-bash-completion-in-debian)
+ * [How to install bash-completion in MacOSX](http://davidalger.com/development/bash-completion-on-os-x-with-MacOSX)
