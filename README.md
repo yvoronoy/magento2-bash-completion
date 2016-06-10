@@ -2,14 +2,15 @@
 One of the nicest facilities of the modern shell is the built in bash completion support. This script allows you to complete commands and options for Magento CLI bin/magento.
 
 ## Example
+
+![Magento2 Bash Completion Screenshot](https://raw.githubusercontent.com/yvoronoy/ReadmeMedia/master/magento2-bash-completion.gif)
+
 ```
 user@host:~$ bin/magento[TAB][TAB]
 admin:user:create                        info:dependencies:show-modules-circular
 admin:user:unlock                        info:language:list
 bash:completion:generate                 info:timezone:list
-cache:clean                              list
-cache:disable                            maintenance:allow-ips
-cache:enable                             maintenance:disable
+
 ...
 ```
 
@@ -18,19 +19,6 @@ user@host:~$ bin/magento setup:install --[TAB][TAB]
 --admin-email                   --db-password
 --admin-firstname               --db-prefix
 --admin-lastname                --db-user
---admin-password                --definition-format
---admin-use-security-key        --http-cache-hosts
---admin-user                    --key
---backend-frontname             --language
---base-url                      --magento-init-params
---base-url-secure               --sales-order-increment-prefix
---cleanup-database              --session-save
---currency                      --skip-db-validation
---db-engine                     --timezone
---db-host                       --use-rewrites
---db-init-statements            --use-sample-data
---db-model                      --use-secure
---db-name                       --use-secure-admin
 ```
 
 ## Installation
