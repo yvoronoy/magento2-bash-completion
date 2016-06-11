@@ -46,7 +46,8 @@ class BashCompletionCommand extends Command
         $description = new ApplicationDescription($this->getApplication());
         $this->commandCollection->setItems($description->getCommands());
         $result = $this->bashCompletion->generateCompletionList(
-            $input->getArgument(self::INPUT_ARG_NAME));
+            $input->getArgument(self::INPUT_ARG_NAME)
+        );
 
         return $output->writeln($result);
     }

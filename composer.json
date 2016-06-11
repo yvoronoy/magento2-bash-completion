@@ -1,14 +1,28 @@
 {
+    "name": "yvoronoy/magento2-bash-completion",
+    "description": "Magento2 Bash Completion Generator",
+    "type": "magento2-module",
     "require": {
+        "php": "~5.5.0|~5.6.0|~7.0.0",
         "phpspec/phpspec": "^2.5",
         "magento/framework": "^100.0",
         "phpmd/phpmd": "2.3.*"
     },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yaroslav Voronoy",
+            "email": "yvoronoy@gmail.com"
+        }
+    ],
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Voronoy\\BashCompletion\\":"src"
-        }
+        },
+        "files": [
+            "src/registration.php"
+        ]
     },
     "repositories": {
         "magento": {
