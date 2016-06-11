@@ -21,7 +21,14 @@ user@host:~$ bin/magento setup:install --[TAB][TAB]
 --admin-lastname                --db-user
 ```
 
-## Installation
+##Prerequisities
+To use magento2 bash completion you should have installed Bash Completion.
+If you don't have installed bash-completion follow guides:
+ * [How to install bash-completion in Debian](https://www.howtoforge.com/how-to-add-bash-completion-in-debian)
+ * [How to install bash-completion in MacOSX](http://davidalger.com/development/bash-completion-on-os-x-with-MacOSX)
+
+
+## Installation Bash Completion
 New completion commands may be placed inside the directory /etc/bash_completion.d or inside /usr/local/etc/bash_completion.d/magento2-bash-completion on MacOSX.
 
 Mac OSX
@@ -38,7 +45,10 @@ sudo curl -o /etc/bash_completion.d/magento2-bash-completion https://raw.githubu
 
 Don't forget reload shell or you can load new complition by next command: `user@host:~$ .  /etc/bash_completion.d/magento2-bash-completion`
 
+## Installation Magento2 Bash Completion Extension
+Magento2 Bash Completion Extension allows you generate your own bash completion list. It collects all available commands and generates a bash completion.
 
-If you don't have installed bash-completion follow these guides:
- * [How to install bash-completion in Debian](https://www.howtoforge.com/how-to-add-bash-completion-in-debian)
- * [How to install bash-completion in MacOSX](http://davidalger.com/development/bash-completion-on-os-x-with-MacOSX)
+You can install the extension by the composer
+```
+composer require yvoronoy/magento2-bash-completion
+```
