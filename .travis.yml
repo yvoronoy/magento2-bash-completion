@@ -1,12 +1,10 @@
 language: php
-sudo: required
 php:
 - 5.5
 - 5.6
 - 7.0
 install:
- - pear channel-discover pear.phpspec.net
- - pear install phpspec/PHPSpec
+ - composer install
 script:
  - vendor/bin/phpspec run
  - vendor/bin/phpcs --standard=PSR1,PSR2
