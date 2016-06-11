@@ -32,7 +32,7 @@ class CommandCollection implements \Countable
 
     /**
      * Set Items
-     * 
+     *
      * @param array $commands
      */
     public function setItems(array $commands)
