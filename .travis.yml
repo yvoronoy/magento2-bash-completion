@@ -3,6 +3,8 @@ php:
 - 5.5
 - 5.6
 - 7.0
+install:
+ - composer install
 script: 
  - vendor/bin/phpcs --standard=PSR1,PSR2
  - vendor/bin/phpmd src/ text cleancode,controversial,design,naming,codesize
