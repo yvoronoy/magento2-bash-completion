@@ -7,6 +7,6 @@ install:
  - composer install
 script:
  - vendor/bin/phpspec run
- - vendor/bin/phpcs --standard=PSR1,PSR2
+ - vendor/bin/phpcs --standard=PSR1,PSR2 src/
  - vendor/bin/phpmd src/ text cleancode,controversial,design,naming,codesize
 
