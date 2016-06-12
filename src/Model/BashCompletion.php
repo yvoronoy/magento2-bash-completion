@@ -12,14 +12,14 @@ class BashCompletion
 
     private $filesystem;
 
-    private $bashCompleteGenerator;
+    private $generator;
 
     public function __construct(
         Filesystem $filesystem,
-        Generator $bashCompleteGenerator
+        Generator $generator
     ) {
         $this->filesystem = $filesystem;
-        $this->bashCompleteGenerator = $bashCompleteGenerator;
+        $this->generator = $generator;
     }
 
     public function generateCompletionList($name = null)
@@ -28,7 +28,7 @@ class BashCompletion
             $name = $this->getName();
         }
         $directoryWrite = $this->filesystem->getDirectoryWrite(DirectoryList::VAR_DIR);
-        $directoryWrite->writeFile($name, $this->bashCompleteGenerator->generate());
+        $directoryWrite->writeFile($name, $this->generator->generate());
         return 'Magento2 Bash Completion generated in var/' . $name;
     }
 
