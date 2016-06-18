@@ -48,30 +48,26 @@ class GeneratorSpec extends ObjectBehavior
         $expected = <<<'TEMPLATE'
 _magento2()
 {
-    local cur prev opts
-    _get_comp_words_by_ref -n : cur
+    local cur opts first_word
     COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
-    firstword=
-    for ((i = 1; i < ${#COMP_WORDS[@]}; ++i)); do
-        if [[ ${COMP_WORDS[i]} != -* ]]; then
-            firstword=${COMP_WORDS[i]}
+    _get_comp_words_by_ref -n : cur words
+    for word in ${words[@]:1}; do
+        if [[ $word != -* ]]; then
+            first_word=$word
             break
         fi
     done
     opts="test:command other-command"
-    case "$firstword" in 
+    case "$first_word" in
         test:command)
-            COMPREPLY=($(compgen -W "--option1 --option2" -- "$cur"))
-            return 0;
+            opts="--option1 --option2"
         ;;
-
     esac
     COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
     __ltrim_colon_completions "$cur"
 }
-complete -F _magento2 magento
+complete -o default -F _magento2 magento
+
 TEMPLATE;
 
         $this->generate()->shouldBe($expected);

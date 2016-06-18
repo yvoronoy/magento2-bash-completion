@@ -1,194 +1,105 @@
 _magento2()
 {
-    local cur prev opts
-    _get_comp_words_by_ref -n : cur
+    local cur opts first_word
     COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
-    firstword=
-    for ((i = 1; i < ${#COMP_WORDS[@]}; ++i)); do
-        if [[ ${COMP_WORDS[i]} != -* ]]; then
-            firstword=${COMP_WORDS[i]}
+    _get_comp_words_by_ref -n : cur words
+    for word in ${words[@]:1}; do
+        if [[ $word != -* ]]; then
+            first_word=$word
             break
         fi
     done
     opts="help list admin:user:create admin:user:unlock bash:completion:generate cache:clean cache:disable cache:enable cache:flush cache:status catalog:images:resize cron:run customer:hash:upgrade deploy:mode:set deploy:mode:show dev:source-theme:deploy dev:tests:run dev:urn-catalog:generate dev:xml:convert i18n:collect-phrases i18n:pack i18n:uninstall indexer:info indexer:reindex indexer:set-mode indexer:show-mode indexer:status info:adminuri info:backups:list info:currency:list info:dependencies:show-framework info:dependencies:show-modules info:dependencies:show-modules-circular info:language:list info:timezone:list maintenance:allow-ips maintenance:disable maintenance:enable maintenance:status module:disable module:enable module:status module:uninstall sampledata:deploy sampledata:remove sampledata:reset setup:backup setup:config:set setup:cron:run setup:db-data:upgrade setup:db-schema:upgrade setup:db:status setup:di:compile setup:di:compile-multi-tenant setup:install setup:performance:generate-fixtures setup:rollback setup:static-content:deploy setup:store-config:set setup:uninstall setup:upgrade theme:uninstall"
-    case "$firstword" in 
+    case "$first_word" in
         help)
-            COMPREPLY=($(compgen -W "--xml --format --raw" -- "$cur"))
-            return 0;
+            opts="--xml --format --raw"
+        ;;        list)
+            opts="--xml --raw --format"
+        ;;        admin:user:create)
+            opts="--admin-user --admin-password --admin-email --admin-firstname --admin-lastname --magento-init-params"
+        ;;        bash:completion:generate)
+            opts="--help --quiet --verbose --version --ansi --no-ansi --no-interaction"
+        ;;        cache:clean)
+            opts="--bootstrap"
+        ;;        cache:disable)
+            opts="--bootstrap"
+        ;;        cache:enable)
+            opts="--bootstrap"
+        ;;        cache:flush)
+            opts="--bootstrap"
+        ;;        cache:status)
+            opts="--bootstrap"
+        ;;        cron:run)
+            opts="--group --bootstrap"
+        ;;        deploy:mode:set)
+            opts="--skip-compilation"
+        ;;        dev:source-theme:deploy)
+            opts="--type --locale --area --theme"
+        ;;        dev:urn-catalog:generate)
+            opts="--ide"
+        ;;        dev:xml:convert)
+            opts="--overwrite"
+        ;;        i18n:collect-phrases)
+            opts="--output --magento"
+        ;;        i18n:pack)
+            opts="--mode --allow-duplicates"
+        ;;        i18n:uninstall)
+            opts="--backup-code"
+        ;;        info:dependencies:show-framework)
+            opts="--output"
+        ;;        info:dependencies:show-modules)
+            opts="--output"
+        ;;        info:dependencies:show-modules-circular)
+            opts="--output"
+        ;;        maintenance:allow-ips)
+            opts="--none --magento-init-params"
+        ;;        maintenance:disable)
+            opts="--ip --magento-init-params"
+        ;;        maintenance:enable)
+            opts="--ip --magento-init-params"
+        ;;        maintenance:status)
+            opts="--magento-init-params"
+        ;;        module:disable)
+            opts="--force --all --clear-static-content --magento-init-params"
+        ;;        module:enable)
+            opts="--force --all --clear-static-content --magento-init-params"
+        ;;        module:status)
+            opts="--magento-init-params"
+        ;;        module:uninstall)
+            opts="--remove-data --backup-code --backup-media --backup-db --clear-static-content --magento-init-params"
+        ;;        setup:backup)
+            opts="--code --media --db --magento-init-params"
+        ;;        setup:config:set)
+            opts="--backend-frontname --key --session-save --definition-format --db-host --db-name --db-user --db-engine --db-password --db-prefix --db-model --db-init-statements --skip-db-validation --http-cache-hosts --magento-init-params"
+        ;;        setup:cron:run)
+            opts="--magento-init-params"
+        ;;        setup:db-data:upgrade)
+            opts="--magento-init-params"
+        ;;        setup:db-schema:upgrade)
+            opts="--magento-init-params"
+        ;;        setup:db:status)
+            opts="--magento-init-params"
+        ;;        setup:di:compile-multi-tenant)
+            opts="--serializer --extra-classes-file --generation --di --exclude-pattern --magento-init-params"
+        ;;        setup:install)
+            opts="--backend-frontname --key --session-save --definition-format --db-host --db-name --db-user --db-engine --db-password --db-prefix --db-model --db-init-statements --skip-db-validation --http-cache-hosts --base-url --language --timezone --currency --use-rewrites --use-secure --base-url-secure --use-secure-admin --admin-use-security-key --admin-user --admin-password --admin-email --admin-firstname --admin-lastname --cleanup-database --sales-order-increment-prefix --use-sample-data --magento-init-params"
+        ;;        setup:performance:generate-fixtures)
+            opts="--skip-reindex"
+        ;;        setup:rollback)
+            opts="--code-file --media-file --db-file --magento-init-params"
+        ;;        setup:static-content:deploy)
+            opts="--dry-run"
+        ;;        setup:store-config:set)
+            opts="--base-url --language --timezone --currency --use-rewrites --use-secure --base-url-secure --use-secure-admin --admin-use-security-key --magento-init-params"
+        ;;        setup:uninstall)
+            opts="--magento-init-params"
+        ;;        setup:upgrade)
+            opts="--keep-generated --magento-init-params"
+        ;;        theme:uninstall)
+            opts="--backup-code --clear-static-content"
         ;;
-        list)
-            COMPREPLY=($(compgen -W "--xml --raw --format" -- "$cur"))
-            return 0;
-        ;;
-        admin:user:create)
-            COMPREPLY=($(compgen -W "--admin-user --admin-password --admin-email --admin-firstname --admin-lastname --magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        bash:completion:generate)
-            COMPREPLY=($(compgen -W "--help --quiet --verbose --version --ansi --no-ansi --no-interaction" -- "$cur"))
-            return 0;
-        ;;
-        cache:clean)
-            COMPREPLY=($(compgen -W "--bootstrap" -- "$cur"))
-            return 0;
-        ;;
-        cache:disable)
-            COMPREPLY=($(compgen -W "--bootstrap" -- "$cur"))
-            return 0;
-        ;;
-        cache:enable)
-            COMPREPLY=($(compgen -W "--bootstrap" -- "$cur"))
-            return 0;
-        ;;
-        cache:flush)
-            COMPREPLY=($(compgen -W "--bootstrap" -- "$cur"))
-            return 0;
-        ;;
-        cache:status)
-            COMPREPLY=($(compgen -W "--bootstrap" -- "$cur"))
-            return 0;
-        ;;
-        cron:run)
-            COMPREPLY=($(compgen -W "--group --bootstrap" -- "$cur"))
-            return 0;
-        ;;
-        deploy:mode:set)
-            COMPREPLY=($(compgen -W "--skip-compilation" -- "$cur"))
-            return 0;
-        ;;
-        dev:source-theme:deploy)
-            COMPREPLY=($(compgen -W "--type --locale --area --theme" -- "$cur"))
-            return 0;
-        ;;
-        dev:urn-catalog:generate)
-            COMPREPLY=($(compgen -W "--ide" -- "$cur"))
-            return 0;
-        ;;
-        dev:xml:convert)
-            COMPREPLY=($(compgen -W "--overwrite" -- "$cur"))
-            return 0;
-        ;;
-        i18n:collect-phrases)
-            COMPREPLY=($(compgen -W "--output --magento" -- "$cur"))
-            return 0;
-        ;;
-        i18n:pack)
-            COMPREPLY=($(compgen -W "--mode --allow-duplicates" -- "$cur"))
-            return 0;
-        ;;
-        i18n:uninstall)
-            COMPREPLY=($(compgen -W "--backup-code" -- "$cur"))
-            return 0;
-        ;;
-        info:dependencies:show-framework)
-            COMPREPLY=($(compgen -W "--output" -- "$cur"))
-            return 0;
-        ;;
-        info:dependencies:show-modules)
-            COMPREPLY=($(compgen -W "--output" -- "$cur"))
-            return 0;
-        ;;
-        info:dependencies:show-modules-circular)
-            COMPREPLY=($(compgen -W "--output" -- "$cur"))
-            return 0;
-        ;;
-        maintenance:allow-ips)
-            COMPREPLY=($(compgen -W "--none --magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        maintenance:disable)
-            COMPREPLY=($(compgen -W "--ip --magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        maintenance:enable)
-            COMPREPLY=($(compgen -W "--ip --magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        maintenance:status)
-            COMPREPLY=($(compgen -W "--magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        module:disable)
-            COMPREPLY=($(compgen -W "--force --all --clear-static-content --magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        module:enable)
-            COMPREPLY=($(compgen -W "--force --all --clear-static-content --magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        module:status)
-            COMPREPLY=($(compgen -W "--magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        module:uninstall)
-            COMPREPLY=($(compgen -W "--remove-data --backup-code --backup-media --backup-db --clear-static-content --magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        setup:backup)
-            COMPREPLY=($(compgen -W "--code --media --db --magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        setup:config:set)
-            COMPREPLY=($(compgen -W "--backend-frontname --key --session-save --definition-format --db-host --db-name --db-user --db-engine --db-password --db-prefix --db-model --db-init-statements --skip-db-validation --http-cache-hosts --magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        setup:cron:run)
-            COMPREPLY=($(compgen -W "--magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        setup:db-data:upgrade)
-            COMPREPLY=($(compgen -W "--magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        setup:db-schema:upgrade)
-            COMPREPLY=($(compgen -W "--magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        setup:db:status)
-            COMPREPLY=($(compgen -W "--magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        setup:di:compile-multi-tenant)
-            COMPREPLY=($(compgen -W "--serializer --extra-classes-file --generation --di --exclude-pattern --magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        setup:install)
-            COMPREPLY=($(compgen -W "--backend-frontname --key --session-save --definition-format --db-host --db-name --db-user --db-engine --db-password --db-prefix --db-model --db-init-statements --skip-db-validation --http-cache-hosts --base-url --language --timezone --currency --use-rewrites --use-secure --base-url-secure --use-secure-admin --admin-use-security-key --admin-user --admin-password --admin-email --admin-firstname --admin-lastname --cleanup-database --sales-order-increment-prefix --use-sample-data --magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        setup:performance:generate-fixtures)
-            COMPREPLY=($(compgen -W "--skip-reindex" -- "$cur"))
-            return 0;
-        ;;
-        setup:rollback)
-            COMPREPLY=($(compgen -W "--code-file --media-file --db-file --magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        setup:static-content:deploy)
-            COMPREPLY=($(compgen -W "--dry-run" -- "$cur"))
-            return 0;
-        ;;
-        setup:store-config:set)
-            COMPREPLY=($(compgen -W "--base-url --language --timezone --currency --use-rewrites --use-secure --base-url-secure --use-secure-admin --admin-use-security-key --magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        setup:uninstall)
-            COMPREPLY=($(compgen -W "--magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        setup:upgrade)
-            COMPREPLY=($(compgen -W "--keep-generated --magento-init-params" -- "$cur"))
-            return 0;
-        ;;
-        theme:uninstall)
-            COMPREPLY=($(compgen -W "--backup-code --clear-static-content" -- "$cur"))
-            return 0;
-        ;;
-
     esac
     COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
     __ltrim_colon_completions "$cur"
 }
-complete -F _magento2 magento
+complete -o default -F _magento2 magento

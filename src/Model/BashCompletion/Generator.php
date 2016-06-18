@@ -35,26 +35,24 @@ class Generator
         return <<<TEMPLATE
 _magento2()
 {
-    local cur prev opts
-    _get_comp_words_by_ref -n : cur
+    local cur opts first_word
     COMPREPLY=()
-    cur="\${COMP_WORDS[COMP_CWORD]}"
-    prev="\${COMP_WORDS[COMP_CWORD-1]}"
-    firstword=
-    for ((i = 1; i < \${#COMP_WORDS[@]}; ++i)); do
-        if [[ \${COMP_WORDS[i]} != -* ]]; then
-            firstword=\${COMP_WORDS[i]}
+    _get_comp_words_by_ref -n : cur words
+    for word in \${words[@]:1}; do
+        if [[ \$word != -* ]]; then
+            first_word=\$word
             break
         fi
     done
     opts="{$this->getAllCommands()}"
-    case "\$firstword" in 
+    case "\$first_word" in
 {$this->getDefinitions()}
     esac
     COMPREPLY=( $(compgen -W "\${opts}" -- \${cur}) )
     __ltrim_colon_completions "\$cur"
 }
-complete -F _magento2 magento
+complete -o default -F _magento2 magento
+
 TEMPLATE;
     }
 
@@ -73,10 +71,8 @@ TEMPLATE;
             $options = implode(' ', $options);
             $definitions .= <<<TEMPLATE
         {$name})
-            COMPREPLY=($(compgen -W "{$options}" -- "\$cur"))
-            return 0;
+            opts="{$options}"
         ;;
-
 TEMPLATE;
         }
 
