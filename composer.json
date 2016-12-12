@@ -16,7 +16,7 @@
             "email": "yvoronoy@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "alpha",
     "autoload": {
         "psr-4": {
             "Voronoy\\BashCompletion\\":"src"
