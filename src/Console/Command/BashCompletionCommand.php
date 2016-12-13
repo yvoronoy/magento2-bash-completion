@@ -44,7 +44,13 @@ class BashCompletionCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $description = new ApplicationDescription($this->getApplication());
-        $this->commandCollection->setItems($description->getCommands());
+        $commands = $description->getCommands();
+        foreach ($commands as $command) {
+            if ($command->getName() == self::COMMAND_NAME) {
+                continue;
+            }
+            $this->commandCollection->add($command);
+        }
         $result = $this->bashCompletion->generateCompletionList(
             $input->getArgument(self::INPUT_ARG_NAME)
         );
