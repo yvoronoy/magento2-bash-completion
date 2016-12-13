@@ -1,5 +1,5 @@
 # Magento2 Bash Completion [![Build Status](https://travis-ci.org/yvoronoy/magento2-bash-completion.svg?branch=master)](https://travis-ci.org/yvoronoy/magento2-bash-completion)
-One of the nicest facilities of the modern shell is the built in bash completion support. This script allows you to complete commands and options for Magento CLI bin/magento.
+This plugin adds autocompletion for Magento 2 CLI Sub Commands and their Options.
 
 ## Example
 
