@@ -9,7 +9,7 @@ _magento2()
             break
         fi
     done
-    opts="help list admin:user:create admin:user:unlock bash:completion:generate cache:clean cache:disable cache:enable cache:flush cache:status catalog:images:resize cron:run customer:hash:upgrade deploy:mode:set deploy:mode:show dev:source-theme:deploy dev:tests:run dev:urn-catalog:generate dev:xml:convert i18n:collect-phrases i18n:pack i18n:uninstall indexer:info indexer:reindex indexer:set-mode indexer:show-mode indexer:status info:adminuri info:backups:list info:currency:list info:dependencies:show-framework info:dependencies:show-modules info:dependencies:show-modules-circular info:language:list info:timezone:list maintenance:allow-ips maintenance:disable maintenance:enable maintenance:status module:disable module:enable module:status module:uninstall sampledata:deploy sampledata:remove sampledata:reset setup:backup setup:config:set setup:cron:run setup:db-data:upgrade setup:db-schema:upgrade setup:db:status setup:di:compile setup:di:compile-multi-tenant setup:install setup:performance:generate-fixtures setup:rollback setup:static-content:deploy setup:store-config:set setup:uninstall setup:upgrade theme:uninstall"
+    opts="help list admin:user:create admin:user:unlock cache:clean cache:disable cache:enable cache:flush cache:status catalog:images:resize catalog:product:attributes:cleanup cron:run customer:hash:upgrade deploy:mode:set deploy:mode:show dev:source-theme:deploy dev:tests:run dev:urn-catalog:generate dev:xml:convert i18n:collect-phrases i18n:pack i18n:uninstall indexer:info indexer:reindex indexer:reset indexer:set-mode indexer:show-mode indexer:status info:adminuri info:backups:list info:currency:list info:dependencies:show-framework info:dependencies:show-modules info:dependencies:show-modules-circular info:language:list info:timezone:list maintenance:allow-ips maintenance:disable maintenance:enable maintenance:status module:disable module:enable module:status module:uninstall sampledata:deploy sampledata:remove sampledata:reset setup:backup setup:config:set setup:cron:run setup:db-data:upgrade setup:db-schema:upgrade setup:db:status setup:di:compile setup:install setup:performance:generate-fixtures setup:rollback setup:static-content:deploy setup:store-config:set setup:uninstall setup:upgrade theme:uninstall"
     case "$first_word" in
         help)
             opts="--xml --format --raw"
@@ -17,8 +17,6 @@ _magento2()
             opts="--xml --raw --format"
         ;;        admin:user:create)
             opts="--admin-user --admin-password --admin-email --admin-firstname --admin-lastname --magento-init-params"
-        ;;        bash:completion:generate)
-            opts="--help --quiet --verbose --version --ansi --no-ansi --no-interaction"
         ;;        cache:clean)
             opts="--bootstrap"
         ;;        cache:disable)
@@ -79,8 +77,6 @@ _magento2()
             opts="--magento-init-params"
         ;;        setup:db:status)
             opts="--magento-init-params"
-        ;;        setup:di:compile-multi-tenant)
-            opts="--serializer --extra-classes-file --generation --di --exclude-pattern --magento-init-params"
         ;;        setup:install)
             opts="--backend-frontname --key --session-save --definition-format --db-host --db-name --db-user --db-engine --db-password --db-prefix --db-model --db-init-statements --skip-db-validation --http-cache-hosts --base-url --language --timezone --currency --use-rewrites --use-secure --base-url-secure --use-secure-admin --admin-use-security-key --admin-user --admin-password --admin-email --admin-firstname --admin-lastname --cleanup-database --sales-order-increment-prefix --use-sample-data --magento-init-params"
         ;;        setup:performance:generate-fixtures)
@@ -88,7 +84,7 @@ _magento2()
         ;;        setup:rollback)
             opts="--code-file --media-file --db-file --magento-init-params"
         ;;        setup:static-content:deploy)
-            opts="--dry-run"
+            opts="--dry-run --no-javascript --no-css --no-less --no-images --no-fonts --no-html --no-misc --no-html-minify --theme --exclude-theme --language --exclude-language --area --exclude-area --jobs"
         ;;        setup:store-config:set)
             opts="--base-url --language --timezone --currency --use-rewrites --use-secure --base-url-secure --use-secure-admin --admin-use-security-key --magento-init-params"
         ;;        setup:uninstall)
