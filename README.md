@@ -25,7 +25,7 @@ user@host:~$ bin/magento setup:install --[TAB][TAB]
 To use magento2 bash completion you should have installed Bash Completion.
 If you don't have installed bash-completion follow guides:
  * [How to install bash-completion in Debian](https://www.howtoforge.com/how-to-add-bash-completion-in-debian)
- * [How to install bash-completion in MacOSX](http://davidalger.com/development/bash-completion-on-os-x-with-MacOSX)
+ * [How to install bash-completion in MacOSX](http://davidalger.com/development/bash-completion-on-os-x-with-brew)
 
 
 ## Installation Bash Completion
