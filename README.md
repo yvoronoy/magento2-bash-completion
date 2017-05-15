@@ -33,13 +33,12 @@ New completion commands may be placed inside the directory /etc/bash_completion.
 
 Mac OSX
 ```
-sudo curl -o /usr/local/etc/bash_completion.d/magento2-bash-completion https://raw.githubusercontent.com/yvoronoy/magento2-bash-completion/master/magento2-bash-completion
+curl -o /usr/local/etc/bash_completion.d/magento2-bash-completion https://raw.githubusercontent.com/yvoronoy/magento2-bash-completion/master/magento2-bash-completion
 ```
 
 
 Linux
 ```
-#Linux
 sudo curl -o /etc/bash_completion.d/magento2-bash-completion https://raw.githubusercontent.com/yvoronoy/magento2-bash-completion/master/magento2-bash-completion
 ```
 
