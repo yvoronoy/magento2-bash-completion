@@ -21,7 +21,7 @@ user@host:~$ bin/magento setup:install --[TAB][TAB]
 --admin-lastname                --db-user
 ```
 
-##Prerequisities
+## Prerequisities
 To use magento2 bash completion you should have installed Bash Completion.
 If you don't have installed bash-completion follow guides:
  * [How to install bash-completion in Debian](https://www.howtoforge.com/how-to-add-bash-completion-in-debian)
