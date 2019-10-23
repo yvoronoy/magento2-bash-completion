@@ -42,7 +42,7 @@ Linux
 sudo curl -o /etc/bash_completion.d/magento2-bash-completion https://raw.githubusercontent.com/yvoronoy/magento2-bash-completion/master/magento2-bash-completion
 ```
 
-Don't forget reload shell or you can load new complition by next command: `user@host:~$ .  /etc/bash_completion.d/magento2-bash-completion`
+Don't forget reload shell or you can load new completion by next command: `user@host:~$ .  /etc/bash_completion.d/magento2-bash-completion`
 
 ## Installation Magento2 Bash Completion Extension
 Magento2 Bash Completion Extension allows you generate your own bash completion list. It collects all available commands and generates a bash completion.
